@@ -532,6 +532,96 @@
     }
     .notes-block ul li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
 
+    /* ── BAR MENU ── */
+    .bar-card {
+      background: #1a1a1a;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .bar-card-header {
+      text-align: center;
+      padding: 28px 20px 20px;
+      border-bottom: 1px solid #333;
+    }
+    .bar-card-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #777;
+      margin-bottom: 8px;
+    }
+    .bar-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #e8e0d0;
+    }
+    .bar-card-sub {
+      font-size: 0.82rem;
+      color: #666;
+      font-style: italic;
+      margin-top: 4px;
+    }
+    .bar-category {
+      padding: 10px 24px 0;
+    }
+    .bar-category-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 0 10px;
+    }
+    .bar-category-divider::before,
+    .bar-category-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #333;
+    }
+    .bar-cat-icon { font-size: 1rem; }
+    .bar-cat-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #666;
+    }
+    .bar-cocktail {
+      padding: 16px 0;
+      border-bottom: 1px solid #2a2a2a;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .bar-cocktail:last-child { border-bottom: none; }
+    .bar-cocktail-info { flex: 1; }
+    .bar-cocktail-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #e8e0d0;
+      margin-bottom: 4px;
+    }
+    .bar-cocktail-ingredients {
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 5px;
+    }
+    .bar-cocktail-ingredients span { color: #aaa; }
+    .bar-cocktail-desc {
+      font-size: 0.78rem;
+      color: #666;
+      font-style: italic;
+    }
+    .bar-cocktail-type {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #555;
+      padding-top: 3px;
+      white-space: nowrap;
+    }
+
     /* ── FOOTER ── */
     .site-footer {
       text-align: center;
@@ -558,6 +648,7 @@
     <button class="nav-tab"        data-tab="contests" role="tab">🎯 Конкурсы</button>
     <button class="nav-tab"        data-tab="prizes"   role="tab">🎁 Призы</button>
     <button class="nav-tab"        data-tab="grocery"  role="tab">🛒 Продукты</button>
+    <button class="nav-tab"        data-tab="bar"      role="tab">🍸 Бар</button>
   </nav>
 </div>
 
@@ -662,8 +753,8 @@
             <td class="owed">450 €</td>
           </tr>
           <tr>
-            <td>Вилла <small style="color:var(--text-light)">(5000€ + доплата за мероприятие)</small></td>
-            <td class="paid">5 000 €</td>
+            <td>Вилла</td>
+            <td class="paid">2 500 €</td>
             <td class="owed">500 €</td>
           </tr>
           <tr>
@@ -680,7 +771,7 @@
         <tfoot>
           <tr>
             <td><strong>Итого</strong></td>
-            <td class="paid"><strong>5 790 €</strong></td>
+            <td class="paid"><strong>3 290 €</strong></td>
             <td class="owed"><strong>3 550 €</strong></td>
           </tr>
         </tfoot>
@@ -690,7 +781,7 @@
     <div class="budget-badges">
       <div class="budget-badge badge-paid">
         <div class="b-label">Оплачено</div>
-        <div class="b-val">5 790 €</div>
+        <div class="b-val">3 290 €</div>
       </div>
       <div class="budget-badge badge-owed">
         <div class="b-label">Осталось</div>
@@ -698,7 +789,7 @@
       </div>
       <div class="budget-badge badge-total">
         <div class="b-label">Всего</div>
-        <div class="b-val">9 340 €</div>
+        <div class="b-val">6 840 €</div>
       </div>
     </div>
   </section>
@@ -1182,7 +1273,7 @@
         <div class="grocery-item"><input type="checkbox" id="g2" onchange="saveChecks();updateProgress()"><label for="g2"><span class="g-check">✓</span><span class="g-text">Виски (0.7 л) — Jameson или бленд</span></label><span class="g-qty">4 бут.</span></div>
         <div class="grocery-item"><input type="checkbox" id="g3" onchange="saveChecks();updateProgress()"><label for="g3"><span class="g-check">✓</span><span class="g-text">Игристое полусладкое (0.75 л) — Велком + тосты</span></label><span class="g-qty">4 бут.</span></div>
         <div class="grocery-item"><input type="checkbox" id="g4" onchange="saveChecks();updateProgress()"><label for="g4"><span class="g-check">✓</span><span class="g-text">Вино сухое/полусухое (0.75 л) — для мам</span></label><span class="g-qty">2 бут.</span></div>
-        <div class="grocery-item"><input type="checkbox" id="g5" onchange="saveChecks();updateProgress()"><label for="g5"><span class="g-check">✓</span><span class="g-text">Пиво (0.5 л) — для друга + утро</span></label><span class="g-qty">18 бут.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g5" onchange="saveChecks();updateProgress()"><label for="g5"><span class="g-check">✓</span><span class="g-text">Пиво (0.5 л) — для друга + утро + фон</span></label><span class="g-qty">18 бут.</span></div>
       </div>
     </div>
 
@@ -1248,7 +1339,7 @@
       <div class="acc-body">
         <div class="grocery-item"><input type="checkbox" id="g25" onchange="saveChecks();updateProgress()"><label for="g25"><span class="g-check">✓</span><span class="g-text">Яйца — яичница + белки для Whisky Sour</span></label><span class="g-qty">30 шт.</span></div>
         <div class="grocery-item"><input type="checkbox" id="g26" onchange="saveChecks();updateProgress()"><label for="g26"><span class="g-check">✓</span><span class="g-text">Сосиски — в микроволновку, быстро</span></label><span class="g-qty">1 кг</span></div>
-        <div class="grocery-item"><input type="checkbox" id="g27" onchange="saveChecks();updateProgress()"><label for="g27"><span class="g-check">✓</span><span class="g-text">Греческий йогурт Chobani</span></label><span class="g-qty">2 упак.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g27" onchange="saveChecks();updateProgress()"><label for="g27"><span class="g-check">✓</span><span class="g-text">Греческий йогурт — Fage или Chobani</span></label><span class="g-qty">2 упак.</span></div>
       </div>
     </div>
 
@@ -1275,6 +1366,80 @@
         <li>Яйца — 30 шт: 10 белков для коктейлей + 20 на яичницу</li>
         <li>Сироп сделать заранее: 1.5 кг сахара + 1.5 л горячей воды, остудить</li>
       </ul>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════ SECTION 7: БАР ════════════════════ -->
+  <section class="section" id="bar">
+    <h2 class="section-title"><span class="ico">🍸</span> Барная карта</h2>
+
+    <div class="bar-card">
+      <div class="bar-card-header">
+        <div class="bar-card-eyebrow">Bar Menu</div>
+        <div class="bar-card-title">Cocktail Card</div>
+        <div class="bar-card-sub">Crete, 2025</div>
+      </div>
+
+      <!-- WHISKY -->
+      <div class="bar-category">
+        <div class="bar-category-divider">
+          <span class="bar-cat-icon">🥃</span>
+          <span class="bar-cat-label">Whisky</span>
+        </div>
+
+        <div class="bar-cocktail">
+          <div class="bar-cocktail-info">
+            <div class="bar-cocktail-name">Whisky Sour</div>
+            <div class="bar-cocktail-ingredients">
+              <span>Виски · свежий лимонный сок · сироп · яичный белок</span>
+            </div>
+            <div class="bar-cocktail-desc">Бархатистый, кисло-сладкий — с пышной пеной сверху</div>
+          </div>
+          <div class="bar-cocktail-type">Whisky</div>
+        </div>
+
+        <div class="bar-cocktail">
+          <div class="bar-cocktail-info">
+            <div class="bar-cocktail-name">Whisky &amp; Peach</div>
+            <div class="bar-cocktail-ingredients">
+              <span>Виски · персиковый сок · лёд</span>
+            </div>
+            <div class="bar-cocktail-desc">Мягкий и сладкий — виски совсем не чувствуется</div>
+          </div>
+          <div class="bar-cocktail-type">Whisky</div>
+        </div>
+      </div>
+
+      <!-- GIN -->
+      <div class="bar-category">
+        <div class="bar-category-divider">
+          <span class="bar-cat-icon">🌿</span>
+          <span class="bar-cat-label">Gin</span>
+        </div>
+
+        <div class="bar-cocktail">
+          <div class="bar-cocktail-info">
+            <div class="bar-cocktail-name">Tom Collins</div>
+            <div class="bar-cocktail-ingredients">
+              <span>Джин · свежий лимонный сок · сироп · содовая</span>
+            </div>
+            <div class="bar-cocktail-desc">Освежающий лимонад — идеален в жару на Крите</div>
+          </div>
+          <div class="bar-cocktail-type">Gin</div>
+        </div>
+
+        <div class="bar-cocktail" style="padding-bottom:24px">
+          <div class="bar-cocktail-info">
+            <div class="bar-cocktail-name">Gin &amp; Pineapple</div>
+            <div class="bar-cocktail-ingredients">
+              <span>Джин · ананасовый сок · лёд</span>
+            </div>
+            <div class="bar-cocktail-desc">Тропический, сладкий — джин скрыт полностью</div>
+          </div>
+          <div class="bar-cocktail-type">Gin</div>
+        </div>
+      </div>
     </div>
   </section>
 
