@@ -533,38 +533,52 @@
     .notes-block ul li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
 
     /* ── BAR MENU ── */
+    /* ── BUDGET CHECKBOXES ── */
+    .budget-check { display: flex; align-items: center; gap: 7px; cursor: pointer; width: 100%; }
+    .budget-check input[type=checkbox] {
+      width: 15px; height: 15px;
+      accent-color: var(--rose-dark);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .budget-check input:checked + span {
+      text-decoration: line-through;
+      opacity: 0.45;
+    }
+
+    /* ── BAR MENU ── */
     .bar-card {
-      background: #1a1a1a;
+      background: var(--white);
       border-radius: var(--radius);
+      box-shadow: var(--shadow);
       overflow: hidden;
     }
     .bar-card-header {
       text-align: center;
-      padding: 28px 20px 20px;
-      border-bottom: 1px solid #333;
+      padding: 32px 20px 24px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, #fffaf7 0%, var(--blush) 100%);
     }
     .bar-card-eyebrow {
       font-size: 0.68rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #777;
+      color: var(--text-light);
       margin-bottom: 8px;
     }
     .bar-card-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.9rem;
+      font-size: 2rem;
       font-weight: 700;
-      color: #e8e0d0;
+      color: var(--text);
     }
     .bar-card-sub {
       font-size: 0.82rem;
-      color: #666;
+      color: var(--text-mid);
       font-style: italic;
       margin-top: 4px;
     }
-    .bar-category {
-      padding: 10px 24px 0;
-    }
+    .bar-category { padding: 0 24px; }
     .bar-category-divider {
       display: flex;
       align-items: center;
@@ -576,48 +590,48 @@
       content: '';
       flex: 1;
       height: 1px;
-      background: #333;
+      background: var(--border);
     }
     .bar-cat-icon { font-size: 1rem; }
     .bar-cat-label {
       font-size: 0.68rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #666;
+      color: var(--text-light);
     }
     .bar-cocktail {
       padding: 16px 0;
-      border-bottom: 1px solid #2a2a2a;
+      border-bottom: 1px solid var(--blush);
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       gap: 12px;
     }
-    .bar-cocktail:last-child { border-bottom: none; }
+    .bar-cocktail:last-child { border-bottom: none; padding-bottom: 24px; }
     .bar-cocktail-info { flex: 1; }
     .bar-cocktail-name {
       font-family: 'Playfair Display', serif;
       font-size: 1.05rem;
       font-weight: 700;
-      color: #e8e0d0;
+      color: var(--text);
       margin-bottom: 4px;
     }
     .bar-cocktail-ingredients {
       font-size: 0.8rem;
-      color: #888;
+      color: var(--rose-dark);
       margin-bottom: 5px;
     }
-    .bar-cocktail-ingredients span { color: #aaa; }
+    .bar-cocktail-ingredients span { color: var(--rose-dark); }
     .bar-cocktail-desc {
       font-size: 0.78rem;
-      color: #666;
+      color: var(--text-mid);
       font-style: italic;
     }
     .bar-cocktail-type {
       font-size: 0.65rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: #555;
+      color: var(--text-light);
       padding-top: 3px;
       white-space: nowrap;
     }
@@ -730,49 +744,49 @@
           <tr>
             <td>Фотограф</td>
             <td class="paid">150 €</td>
-            <td class="owed">770 €</td>
+            <td class="owed" data-amount="770"><label class="budget-check"><input type="checkbox" onchange="recalcBudget()"><span>770 €</span></label></td>
           </tr>
           <tr>
             <td>Машина</td>
             <td class="paid">55 €</td>
-            <td class="owed">500 €</td>
+            <td class="owed" data-amount="500"><label class="budget-check"><input type="checkbox" onchange="recalcBudget()"><span>500 €</span></label></td>
           </tr>
           <tr>
             <td>Еда</td>
             <td class="paid">332 €</td>
-            <td class="owed">858 €</td>
+            <td class="owed" data-amount="858"><label class="budget-check"><input type="checkbox" onchange="recalcBudget()"><span>858 €</span></label></td>
           </tr>
           <tr>
             <td>Фейерверк</td>
             <td class="paid">103 €</td>
-            <td class="owed">242 €</td>
+            <td class="owed" data-amount="242"><label class="budget-check"><input type="checkbox" onchange="recalcBudget()"><span>242 €</span></label></td>
           </tr>
           <tr>
             <td>Свет</td>
             <td class="paid">100 €</td>
-            <td class="owed">450 €</td>
+            <td class="owed" data-amount="450"><label class="budget-check"><input type="checkbox" onchange="recalcBudget()"><span>450 €</span></label></td>
           </tr>
           <tr>
             <td>Вилла</td>
             <td class="paid">2 500 €</td>
-            <td class="owed">500 €</td>
+            <td class="owed" data-amount="500"><label class="budget-check"><input type="checkbox" onchange="recalcBudget()"><span>500 €</span></label></td>
           </tr>
           <tr>
             <td>Цветы</td>
             <td class="paid">50 €</td>
-            <td class="owed">130 €</td>
+            <td class="owed" data-amount="130"><label class="budget-check"><input type="checkbox" onchange="recalcBudget()"><span>130 €</span></label></td>
           </tr>
           <tr>
             <td>Торт</td>
             <td class="paid">—</td>
-            <td class="owed">100 €</td>
+            <td class="owed" data-amount="100"><label class="budget-check"><input type="checkbox" onchange="recalcBudget()"><span>100 €</span></label></td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
             <td><strong>Итого</strong></td>
             <td class="paid"><strong>3 290 €</strong></td>
-            <td class="owed"><strong>3 550 €</strong></td>
+            <td class="owed"><strong id="budget-owed-total">3 550 €</strong></td>
           </tr>
         </tfoot>
       </table>
@@ -785,7 +799,7 @@
       </div>
       <div class="budget-badge badge-owed">
         <div class="b-label">Осталось</div>
-        <div class="b-val">3 550 €</div>
+        <div class="b-val" id="budget-remaining-badge">3 550 €</div>
       </div>
       <div class="budget-badge badge-total">
         <div class="b-label">Всего</div>
@@ -1492,6 +1506,27 @@
     btn.classList.toggle('open', !isOpen);
     btn.nextElementSibling.classList.toggle('open', !isOpen);
   }
+
+  // Budget checkboxes
+  function recalcBudget() {
+    let remaining = 0;
+    document.querySelectorAll('#budget td[data-amount]').forEach(td => {
+      const cb = td.querySelector('input[type=checkbox]');
+      if (!cb.checked) remaining += parseInt(td.dataset.amount);
+    });
+    const fmt = remaining.toLocaleString('ru') + ' €';
+    document.getElementById('budget-owed-total').textContent = fmt;
+    document.getElementById('budget-remaining-badge').textContent = fmt;
+    const state = {};
+    document.querySelectorAll('#budget td[data-amount] input').forEach((cb, i) => { state['b' + i] = cb.checked; });
+    localStorage.setItem('budgetChecks', JSON.stringify(state));
+  }
+  function loadBudget() {
+    const state = JSON.parse(localStorage.getItem('budgetChecks') || '{}');
+    document.querySelectorAll('#budget td[data-amount] input').forEach((cb, i) => { if (state['b' + i]) cb.checked = true; });
+    recalcBudget();
+  }
+  loadBudget();
 
   // Grocery checkboxes
   function saveChecks() {
