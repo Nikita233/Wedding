@@ -454,6 +454,84 @@
       .prizes-summary { gap: 10px; }
     }
 
+    /* ── GROCERY ── */
+    .grocery-progress {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .gp-bar-wrap { flex: 1; background: var(--blush); border-radius: 6px; height: 8px; overflow: hidden; }
+    .gp-bar { height: 100%; background: linear-gradient(90deg, var(--rose-dark), var(--gold)); border-radius: 6px; transition: width 0.3s; }
+    .gp-label { font-size: 0.8rem; font-weight: 700; color: var(--text-mid); white-space: nowrap; }
+
+    .grocery-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px dotted var(--border);
+    }
+    .grocery-item:last-child { border-bottom: none; }
+    .grocery-item label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      flex: 1;
+      font-size: 0.86rem;
+    }
+    .grocery-item input[type="checkbox"] { display: none; }
+    .g-check {
+      width: 20px; height: 20px;
+      border: 2px solid var(--rose);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s, border-color 0.15s;
+      font-size: 0.7rem;
+      color: transparent;
+    }
+    .grocery-item input:checked ~ .g-text { text-decoration: line-through; color: var(--text-light); }
+    .grocery-item input:checked + label .g-check {
+      background: var(--rose-dark);
+      border-color: var(--rose-dark);
+      color: #fff;
+    }
+    .g-text { flex: 1; }
+    .g-qty { font-size: 0.78rem; color: var(--text-light); white-space: nowrap; background: var(--blush); padding: 2px 8px; border-radius: 10px; }
+
+    .notes-block {
+      background: #fffbf0;
+      border-left: 4px solid var(--gold);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      margin-top: 24px;
+    }
+    .notes-block .notes-title {
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 8px;
+    }
+    .notes-block ul { list-style: none; padding: 0; }
+    .notes-block ul li {
+      font-size: 0.84rem;
+      color: var(--text-mid);
+      padding: 4px 0;
+      display: flex;
+      gap: 7px;
+    }
+    .notes-block ul li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
+
     /* ── FOOTER ── */
     .site-footer {
       text-align: center;
@@ -479,6 +557,7 @@
     <button class="nav-tab"        data-tab="contacts" role="tab">📞 Контакты</button>
     <button class="nav-tab"        data-tab="contests" role="tab">🎯 Конкурсы</button>
     <button class="nav-tab"        data-tab="prizes"   role="tab">🎁 Призы</button>
+    <button class="nav-tab"        data-tab="grocery"  role="tab">🛒 Продукты</button>
   </nav>
 </div>
 
@@ -1081,6 +1160,124 @@
     </div>
   </section>
 
+
+  <!-- ════════════════════ SECTION 6: ПРОДУКТЫ ════════════════════ -->
+  <section class="section" id="grocery">
+    <h2 class="section-title"><span class="ico">🛒</span> Продукты</h2>
+
+    <div class="grocery-progress">
+      <div class="gp-bar-wrap"><div class="gp-bar" id="gp-bar" style="width:0%"></div></div>
+      <div class="gp-label" id="gp-label">0 / 0</div>
+    </div>
+
+    <!-- Алкоголь -->
+    <div class="acc-item">
+      <button class="acc-header" onclick="toggleAcc(this)">
+        🍾 Алкоголь
+        <span class="acc-score">~300 €</span>
+        <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <div class="grocery-item"><input type="checkbox" id="g1" onchange="saveChecks();updateProgress()"><label for="g1"><span class="g-check">✓</span><span class="g-text">Джин (0.7 л) — Beefeater или Tanqueray</span></label><span class="g-qty">4 бут.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g2" onchange="saveChecks();updateProgress()"><label for="g2"><span class="g-check">✓</span><span class="g-text">Виски (0.7 л) — Jameson или бленд</span></label><span class="g-qty">4 бут.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g3" onchange="saveChecks();updateProgress()"><label for="g3"><span class="g-check">✓</span><span class="g-text">Игристое полусладкое (0.75 л) — Велком + тосты</span></label><span class="g-qty">4 бут.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g4" onchange="saveChecks();updateProgress()"><label for="g4"><span class="g-check">✓</span><span class="g-text">Вино сухое/полусухое (0.75 л) — для мам</span></label><span class="g-qty">2 бут.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g5" onchange="saveChecks();updateProgress()"><label for="g5"><span class="g-check">✓</span><span class="g-text">Пиво (0.5 л) — для друга + утро</span></label><span class="g-qty">18 бут.</span></div>
+      </div>
+    </div>
+
+    <!-- Коктейли -->
+    <div class="acc-item">
+      <button class="acc-header" onclick="toggleAcc(this)">
+        🍹 Для коктейлей
+        <span class="acc-score">~37 €</span>
+        <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <div class="grocery-item"><input type="checkbox" id="g6" onchange="saveChecks();updateProgress()"><label for="g6"><span class="g-check">✓</span><span class="g-text">Ананасовый сок (1 л) — Джин+ананас+Collins</span></label><span class="g-qty">9 бут.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g7" onchange="saveChecks();updateProgress()"><label for="g7"><span class="g-check">✓</span><span class="g-text">Персиковый сок (1 л) — Виски+персик+Sour</span></label><span class="g-qty">9 бут.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g8" onchange="saveChecks();updateProgress()"><label for="g8"><span class="g-check">✓</span><span class="g-text">Содовая / Schweppes (1 л) — Tom Collins</span></label><span class="g-qty">8 бут.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g9" onchange="saveChecks();updateProgress()"><label for="g9"><span class="g-check">✓</span><span class="g-text">Лимоны свежие</span></label><span class="g-qty">7 шт.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g10" onchange="saveChecks();updateProgress()"><label for="g10"><span class="g-check">✓</span><span class="g-text">Сахар для сиропа</span></label><span class="g-qty">1.5 кг</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g11" onchange="saveChecks();updateProgress()"><label for="g11"><span class="g-check">✓</span><span class="g-text">Лёд — на жаре тает быстро</span></label><span class="g-qty">10 кг</span></div>
+      </div>
+    </div>
+
+    <!-- BBQ -->
+    <div class="acc-item">
+      <button class="acc-header" onclick="toggleAcc(this)">
+        🔥 Барбекю + духовка
+        <span class="acc-score">~50 €</span>
+        <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <div class="grocery-item"><input type="checkbox" id="g12" onchange="saveChecks();updateProgress()"><label for="g12"><span class="g-check">✓</span><span class="g-text">Курица маринованная без кости (κοτόπουλο — готовое в Лидл)</span></label><span class="g-qty">5 кг</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g13" onchange="saveChecks();updateProgress()"><label for="g13"><span class="g-check">✓</span><span class="g-text">Картошка дольками + масло + паприка в духовку</span></label><span class="g-qty">4 кг</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g14" onchange="saveChecks();updateProgress()"><label for="g14"><span class="g-check">✓</span><span class="g-text">Питы для курицы</span></label><span class="g-qty">15 шт.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g15" onchange="saveChecks();updateProgress()"><label for="g15"><span class="g-check">✓</span><span class="g-text">Соус цацики</span></label><span class="g-qty">2 упак.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g16" onchange="saveChecks();updateProgress()"><label for="g16"><span class="g-check">✓</span><span class="g-text">Кетчуп + майонез</span></label><span class="g-qty">1+1 упак.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g17" onchange="saveChecks();updateProgress()"><label for="g17"><span class="g-check">✓</span><span class="g-text">Помидоры + огурцы — салат к ужину</span></label><span class="g-qty">1 кг + 4 шт.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g18" onchange="saveChecks();updateProgress()"><label for="g18"><span class="g-check">✓</span><span class="g-text">Оливковое масло</span></label><span class="g-qty">1 бут.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g19" onchange="saveChecks();updateProgress()"><label for="g19"><span class="g-check">✓</span><span class="g-text">Приправа паприка + чеснок</span></label><span class="g-qty">1 пачка + 1 гол.</span></div>
+      </div>
+    </div>
+
+    <!-- Бутерброды -->
+    <div class="acc-item">
+      <button class="acc-header" onclick="toggleAcc(this)">
+        🥪 Бутерброды и перекусы
+        <span class="acc-score">~26 €</span>
+        <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <div class="grocery-item"><input type="checkbox" id="g20" onchange="saveChecks();updateProgress()"><label for="g20"><span class="g-check">✓</span><span class="g-text">Хлеб / батон — для бутербродов + завтрак</span></label><span class="g-qty">4 шт.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g21" onchange="saveChecks();updateProgress()"><label for="g21"><span class="g-check">✓</span><span class="g-text">Колбаса / салями нарезка — завтрак</span></label><span class="g-qty">800 г</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g22" onchange="saveChecks();updateProgress()"><label for="g22"><span class="g-check">✓</span><span class="g-text">Сыр нарезка — весь день + завтрак</span></label><span class="g-qty">600 г</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g23" onchange="saveChecks();updateProgress()"><label for="g23"><span class="g-check">✓</span><span class="g-text">Масло сливочное</span></label><span class="g-qty">200 г</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g24" onchange="saveChecks();updateProgress()"><label for="g24"><span class="g-check">✓</span><span class="g-text">Чипсы (большие пачки)</span></label><span class="g-qty">3 пачки</span></div>
+      </div>
+    </div>
+
+    <!-- Завтрак -->
+    <div class="acc-item">
+      <button class="acc-header" onclick="toggleAcc(this)">
+        🍳 Завтрак день свадьбы
+        <span class="acc-score">~14 €</span>
+        <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <div class="grocery-item"><input type="checkbox" id="g25" onchange="saveChecks();updateProgress()"><label for="g25"><span class="g-check">✓</span><span class="g-text">Яйца — яичница + белки для Whisky Sour</span></label><span class="g-qty">30 шт.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g26" onchange="saveChecks();updateProgress()"><label for="g26"><span class="g-check">✓</span><span class="g-text">Сосиски — в микроволновку, быстро</span></label><span class="g-qty">1 кг</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g27" onchange="saveChecks();updateProgress()"><label for="g27"><span class="g-check">✓</span><span class="g-text">Греческий йогурт Chobani</span></label><span class="g-qty">2 упак.</span></div>
+      </div>
+    </div>
+
+    <!-- Напитки -->
+    <div class="acc-item">
+      <button class="acc-header" onclick="toggleAcc(this)">
+        💧 Напитки и базовое
+        <span class="acc-score">~23 €</span>
+        <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <div class="grocery-item"><input type="checkbox" id="g28" onchange="saveChecks();updateProgress()"><label for="g28"><span class="g-check">✓</span><span class="g-text">Вода питьевая (1.5 л) — на жаре Крита воды надо много</span></label><span class="g-qty">15 бут.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g29" onchange="saveChecks();updateProgress()"><label for="g29"><span class="g-check">✓</span><span class="g-text">Молоко</span></label><span class="g-qty">2 упак.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g30" onchange="saveChecks();updateProgress()"><label for="g30"><span class="g-check">✓</span><span class="g-text">Кофе</span></label><span class="g-qty">1 упак.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g31" onchange="saveChecks();updateProgress()"><label for="g31"><span class="g-check">✓</span><span class="g-text">Сок апельсиновый (1 л) — завтрак</span></label><span class="g-qty">2 бут.</span></div>
+        <div class="grocery-item"><input type="checkbox" id="g32" onchange="saveChecks();updateProgress()"><label for="g32"><span class="g-check">✓</span><span class="g-text">Соль + перец</span></label><span class="g-qty">по 1 пачке</span></div>
+      </div>
+    </div>
+
+    <div class="notes-block">
+      <div class="notes-title">📝 Заметки</div>
+      <ul>
+        <li>Барная карта: Whisky Sour · Виски+персик · Tom Collins · Джин+ананас</li>
+        <li>Яйца — 30 шт: 10 белков для коктейлей + 20 на яичницу</li>
+        <li>Сироп сделать заранее: 1.5 кг сахара + 1.5 л горячей воды, остудить</li>
+      </ul>
+    </div>
+  </section>
+
 </main>
 
 <footer class="site-footer">С любовью ♡ 13 мая 2025 · Крит, Греция</footer>
@@ -1103,6 +1300,29 @@
     btn.classList.toggle('open', !isOpen);
     btn.nextElementSibling.classList.toggle('open', !isOpen);
   }
+
+  // Grocery checkboxes
+  function saveChecks() {
+    const state = {};
+    document.querySelectorAll('#grocery input[type=checkbox]').forEach(cb => { state[cb.id] = cb.checked; });
+    localStorage.setItem('grocery', JSON.stringify(state));
+  }
+  function loadChecks() {
+    const state = JSON.parse(localStorage.getItem('grocery') || '{}');
+    Object.keys(state).forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.checked = state[id];
+    });
+    updateProgress();
+  }
+  function updateProgress() {
+    const all = document.querySelectorAll('#grocery input[type=checkbox]');
+    const done = [...all].filter(c => c.checked).length;
+    const pct = all.length ? Math.round(done / all.length * 100) : 0;
+    document.getElementById('gp-bar').style.width = pct + '%';
+    document.getElementById('gp-label').textContent = done + ' / ' + all.length + ' куплено';
+  }
+  loadChecks();
 </script>
 </body>
 </html>
